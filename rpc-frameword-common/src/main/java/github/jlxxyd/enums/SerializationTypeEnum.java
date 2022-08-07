@@ -1,5 +1,8 @@
 package github.jlxxyd.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum SerializationTypeEnum {
 
     KYRO((byte) 0x01, "kyro"),
