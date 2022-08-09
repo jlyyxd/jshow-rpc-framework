@@ -2,7 +2,7 @@ package github.jlyyxd.serialze.hessian;
 
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;
-import github.jlxxyd.exception.SerializeException;
+import github.jlyyxd.exception.SerializeException;
 import github.jlyyxd.serialze.Serializer;
 
 import java.io.ByteArrayInputStream;

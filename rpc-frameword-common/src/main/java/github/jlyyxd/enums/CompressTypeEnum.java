@@ -1,4 +1,4 @@
-package github.jlxxyd.enums;
+package github.jlyyxd.enums;
 
 import lombok.Getter;
 

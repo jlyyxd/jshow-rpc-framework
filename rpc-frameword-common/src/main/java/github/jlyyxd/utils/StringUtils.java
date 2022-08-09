@@ -1,4 +1,4 @@
-package github.jlxxyd.utils;
+package github.jlyyxd.utils;
 
 public class StringUtils {
     public static boolean isBlank(String s) {

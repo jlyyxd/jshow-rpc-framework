@@ -1,4 +1,4 @@
-package github.jlxxyd.extension;
+package github.jlyyxd.extension;
 
 import lombok.Getter;
 import lombok.Setter;

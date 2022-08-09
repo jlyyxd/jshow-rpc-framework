@@ -1,7 +1,7 @@
 package github.jlyyxd.remoting.dto;
 
-import github.jlxxyd.enums.RpcResponseCodeEnum;
-import github.jlxxyd.utils.StringUtils;
+import github.jlyyxd.enums.RpcResponseCodeEnum;
+import github.jlyyxd.utils.StringUtils;
 import lombok.*;
 
 import java.io.Serializable;

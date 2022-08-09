@@ -1,6 +1,6 @@
 package github.jlyyxd.compress;
 
-import github.jlxxyd.extension.SPI;
+import github.jlyyxd.extension.SPI;
 
 @SPI
 public interface Compress {

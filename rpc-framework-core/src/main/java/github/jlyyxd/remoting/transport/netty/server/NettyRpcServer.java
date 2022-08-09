@@ -1,7 +1,9 @@
 package github.jlyyxd.remoting.transport.netty.server;
 
-import github.jlxxyd.utils.RuntimeUtil;
-import github.jlxxyd.utils.concurrent.ThreadFactoryBuilder.ThreadPoolFactoryUtil;
+import github.jlyyxd.utils.RuntimeUtil;
+import github.jlyyxd.utils.concurrent.ThreadFactoryBuilder.ThreadPoolFactoryUtil;
+import github.jlyyxd.remoting.transport.netty.codec.RpcMessageDecoder;
+import github.jlyyxd.remoting.transport.netty.codec.RpcMessageEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -47,10 +49,12 @@ public class NettyRpcServer {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             pipeline.addLast(new LoggingHandler(LogLevel.INFO))
+                                    .addLast(new RpcMessageDecoder())
+                                    .addLast(new RpcMessageEncoder())
                                     .addLast(new ChannelInboundHandlerAdapter() {
                                         @Override
                                         public void channelRead(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
-                                            log.info("接收到消息：\n{}", msg);
+                                            log.info("接收到消息：\n{}\n{}", msg,msg.getClass().getName());
                                             channelHandlerContext.writeAndFlush(msg);
                                         }
                                     });

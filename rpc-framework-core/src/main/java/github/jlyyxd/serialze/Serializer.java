@@ -1,6 +1,6 @@
 package github.jlyyxd.serialze;
 
-import github.jlxxyd.extension.SPI;
+import github.jlyyxd.extension.SPI;
 
 @SPI
 public interface Serializer {

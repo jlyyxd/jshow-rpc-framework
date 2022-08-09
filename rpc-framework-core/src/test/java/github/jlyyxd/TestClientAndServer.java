@@ -1,9 +1,15 @@
 package github.jlyyxd;
 
+import github.jlyyxd.enums.CompressTypeEnum;
+import github.jlyyxd.enums.SerializationTypeEnum;
+import github.jlyyxd.remoting.constants.RpcConstants;
+import github.jlyyxd.remoting.dto.RpcMessage;
+import github.jlyyxd.remoting.dto.RpcRequest;
+import github.jlyyxd.remoting.transport.netty.codec.RpcMessageDecoder;
+import github.jlyyxd.remoting.transport.netty.codec.RpcMessageEncoder;
 import github.jlyyxd.remoting.transport.netty.server.NettyRpcServer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 
 import io.netty.channel.socket.SocketChannel;
@@ -35,14 +41,22 @@ public class TestClientAndServer {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             pipeline.addLast(new LoggingHandler(LogLevel.DEBUG))
-                                    .addLast(new StringEncoder())
-                                    .addLast(new StringDecoder())
+                                    .addLast(new RpcMessageDecoder())
+                                    .addLast(new RpcMessageEncoder())
+//                                    .addLast(new StringDecoder())
+//                                    .addLast(new StringEncoder())
                                     .addLast(new ChannelInboundHandlerAdapter() {
                                         @Override
                                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
                                             log.info("tcp连接成功");
-                                            ctx.writeAndFlush("hello");
-                                            log.info("发送数据hello");
+                                            RpcMessage rpcMessage = RpcMessage.builder()
+                                                    .messageType(RpcConstants.REQUEST_TYPE)
+                                                    .compress(CompressTypeEnum.GZIP.getCode())
+                                                    .codec(SerializationTypeEnum.KYRO.getCode())
+                                                    .data(new RpcRequest())
+                                                    .requestId(1)
+                                                    .build();
+                                            ctx.writeAndFlush(rpcMessage);
                                         }
 
                                         @Override

@@ -1,4 +1,4 @@
-package github.jlxxyd.exception;
+package github.jlyyxd.exception;
 
 public class SerializeException extends RuntimeException{
     public SerializeException(String message) {

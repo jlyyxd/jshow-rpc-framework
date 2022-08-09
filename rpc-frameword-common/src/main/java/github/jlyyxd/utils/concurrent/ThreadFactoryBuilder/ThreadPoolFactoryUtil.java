@@ -1,4 +1,4 @@
-package github.jlxxyd.utils.concurrent.ThreadFactoryBuilder;
+package github.jlyyxd.utils.concurrent.ThreadFactoryBuilder;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
