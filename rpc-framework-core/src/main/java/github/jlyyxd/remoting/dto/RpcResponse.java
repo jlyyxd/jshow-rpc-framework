@@ -32,9 +32,9 @@ public class RpcResponse<T> implements Serializable {
      */
     private T data;
 
-    public static <T> RpcResponse<T> success(T data, String requestId) throws Exception {
+    public static <T> RpcResponse<T> success(T data, String requestId){
         if (StringUtils.isBlank(requestId)) {
-            throw new Exception("RequestId should not be blank!");
+            throw new IllegalArgumentException("RequestId should not be blank!");
         }
         RpcResponse<T> response = new RpcResponse<>();
         response.setCode(RpcResponseCodeEnum.SUCCESS.getCode());
