@@ -1,3 +1,0 @@
-kyro=github.jlyyxd.serialze.kyro.KyroSerializer
-hessian=github.jlyyxd.serialze.hessian.HessianSerializer
-protostuff=github.jlyyxd.serialze.protostuff.ProtostuffSerializer

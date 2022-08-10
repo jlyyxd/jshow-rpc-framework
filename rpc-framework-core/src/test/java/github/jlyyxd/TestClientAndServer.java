@@ -43,8 +43,6 @@ public class TestClientAndServer {
                             pipeline.addLast(new LoggingHandler(LogLevel.DEBUG))
                                     .addLast(new RpcMessageDecoder())
                                     .addLast(new RpcMessageEncoder())
-//                                    .addLast(new StringDecoder())
-//                                    .addLast(new StringEncoder())
                                     .addLast(new ChannelInboundHandlerAdapter() {
                                         @Override
                                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
