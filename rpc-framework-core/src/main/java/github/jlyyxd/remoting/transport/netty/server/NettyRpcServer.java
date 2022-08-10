@@ -1,5 +1,9 @@
 package github.jlyyxd.remoting.transport.netty.server;
 
+import github.jlyyxd.config.RpcServiceConfig;
+import github.jlyyxd.factory.SingletonFactory;
+import github.jlyyxd.provider.ServiceProvider;
+import github.jlyyxd.provider.impl.ZkServiceProviderImpl;
 import github.jlyyxd.utils.RuntimeUtil;
 import github.jlyyxd.utils.concurrent.ThreadFactoryBuilder.ThreadPoolFactoryUtil;
 import github.jlyyxd.remoting.transport.netty.codec.RpcMessageDecoder;
@@ -22,6 +26,15 @@ public class NettyRpcServer {
 
     public static final int PORT = 8081;
 
+    // 从单例工厂中获取ServiceProvider用于发布服务
+    private final ServiceProvider serviceProvider = SingletonFactory.getInstance(ZkServiceProviderImpl.class);
+
+    public void registerService(RpcServiceConfig rpcServiceConfig){
+        // 发布服务
+        // ① 将服务对象保存到内存中，便于调用
+        // ② 服务名/{ip}:{port} 信息添加到注册中心，方便rpc客户端寻找服务
+        serviceProvider.publishService(rpcServiceConfig);
+    }
     /**
      * 启动rpc服务器方法
      */
@@ -51,13 +64,7 @@ public class NettyRpcServer {
                             pipeline.addLast(new LoggingHandler(LogLevel.INFO))
                                     .addLast(new RpcMessageDecoder())
                                     .addLast(new RpcMessageEncoder())
-                                    .addLast(new ChannelInboundHandlerAdapter() {
-                                        @Override
-                                        public void channelRead(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
-                                            log.info("接收到消息：\n{}\n{}", msg,msg.getClass().getName());
-                                            channelHandlerContext.writeAndFlush(msg);
-                                        }
-                                    });
+                                    .addLast(serviceHandlerGroup, new NettyRpcServerHandler());
                         }
                     });
 
