@@ -50,7 +50,7 @@ public class TestClientAndServer {
                                             RpcMessage rpcMessage = RpcMessage.builder()
                                                     .messageType(RpcConstants.REQUEST_TYPE)
                                                     .compress(CompressTypeEnum.GZIP.getCode())
-                                                    .codec(SerializationTypeEnum.KYRO.getCode())
+                                                    .codec(SerializationTypeEnum.HESSIAN.getCode())
                                                     .data(new RpcRequest())
                                                     .requestId(1)
                                                     .build();

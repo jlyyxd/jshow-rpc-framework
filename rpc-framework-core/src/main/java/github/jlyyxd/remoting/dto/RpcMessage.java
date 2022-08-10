@@ -2,13 +2,15 @@ package github.jlyyxd.remoting.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class RpcMessage {
+public class RpcMessage implements Serializable {
     /**
      * rpc message type
      * 标注data的类型
