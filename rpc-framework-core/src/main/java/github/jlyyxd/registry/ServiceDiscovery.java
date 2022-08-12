@@ -6,6 +6,6 @@ import github.jlyyxd.remoting.dto.RpcRequest;
 import java.net.InetSocketAddress;
 
 @SPI
-public interface ServiceDisocovery {
+public interface ServiceDiscovery {
     InetSocketAddress lookUpService(RpcRequest rpcRequest);
 }

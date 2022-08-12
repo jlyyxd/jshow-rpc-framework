@@ -4,7 +4,7 @@ import github.jlyyxd.enums.RpcErrorMessageEnum;
 import github.jlyyxd.exception.RpcException;
 import github.jlyyxd.extension.ExtensionLoader;
 import github.jlyyxd.loadbalance.LoadBalance;
-import github.jlyyxd.registry.ServiceDisocovery;
+import github.jlyyxd.registry.ServiceDiscovery;
 import github.jlyyxd.registry.zk.util.CuratorUtil;
 import github.jlyyxd.remoting.dto.RpcRequest;
 import github.jlyyxd.utils.CollectionUtil;
@@ -15,7 +15,7 @@ import java.net.InetSocketAddress;
 import java.util.List;
 
 @Slf4j
-public class ZkServiceDiscoveryImpl implements ServiceDisocovery {
+public class ZkServiceDiscoveryImpl implements ServiceDiscovery {
     private final LoadBalance loadBalance;
 
     public ZkServiceDiscoveryImpl() {
