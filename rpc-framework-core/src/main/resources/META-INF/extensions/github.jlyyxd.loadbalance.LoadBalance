@@ -1,1 +1,1 @@
-loadBalance=github.jlyyxd.loadbalance.loadbalancer.ConsistentHashLoadBalance
+loadBalance=github.jlyyxd.loadbalance.loadbalancer.RandomLoadBalance
