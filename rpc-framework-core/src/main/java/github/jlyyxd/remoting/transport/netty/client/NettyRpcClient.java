@@ -27,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class NettyRpcClient implements RpcRequestTransport {
+public final class NettyRpcClient implements RpcRequestTransport {
     private final ServiceDiscovery serviceDiscovery;
     private final UnprocessedRequests unprocessedRequests;
     private final ChannelProvider channelProvider;
@@ -38,7 +38,6 @@ public class NettyRpcClient implements RpcRequestTransport {
         eventLoopGroup = new NioEventLoopGroup();
         bootstrap = new Bootstrap();
 
-        NettyRpcClientHandler nettyRpcClientHandler = new NettyRpcClientHandler(this);
         bootstrap.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
                 .handler(new LoggingHandler(LogLevel.INFO))
@@ -51,7 +50,7 @@ public class NettyRpcClient implements RpcRequestTransport {
                         pipeline.addLast(new RpcMessageDecoder());
                         // 一定时间内没有向服务端发送数据就会发送一个心跳包
                         pipeline.addLast(new IdleStateHandler(0,5,0, TimeUnit.SECONDS));
-                        pipeline.addLast(nettyRpcClientHandler);
+                        pipeline.addLast(new NettyRpcClientHandler());
                     }
                 });
         this.serviceDiscovery = ExtensionLoader.getExtensionLoader(ServiceDiscovery.class)
