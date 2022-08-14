@@ -13,6 +13,8 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,6 +70,20 @@ public class NettyRpcServerHandler extends ChannelInboundHandlerAdapter {
             }
         } finally{
             ReferenceCountUtil.release(msg);
+        }
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if(evt instanceof IdleStateEvent){
+            IdleState state = ((IdleStateEvent) evt).state();
+            if(state==IdleState.READER_IDLE){
+                // 对应时间为30s无输入断开连接
+                log.info("idle check happen, so close the connection");
+                ctx.close();
+            }else{
+                super.userEventTriggered(ctx, evt);
+            }
         }
     }
 
