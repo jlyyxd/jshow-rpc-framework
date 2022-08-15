@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>github.jlxxyd.myrpc</groupId>
-            <artifactId>rpc-frameword-common</artifactId>
+            <artifactId>rpc-framework-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

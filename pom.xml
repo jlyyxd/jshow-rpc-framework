@@ -31,7 +31,7 @@
     </properties>
     <modules>
 
-        <module>rpc-frameword-common</module>
+        <module>rpc-framework-common</module>
         <module>rpc-framework-core</module>
         <module>example-client</module>
         <module>example-server</module>
@@ -96,7 +96,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${checkstyle-maven-plugin.version}</version>
                 <configuration>
-                    <configLocation>config/checkstyle.xml</configLocation>
+                    <configLocation>github.jlyyxd.config/checkstyle.xml</configLocation>
                 </configuration>
                 <executions>
                     <execution>

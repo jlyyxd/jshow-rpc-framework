@@ -13,7 +13,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class RpcServiceRegisterPostProcessor implements BeanPostProcessor {
     private final ServiceProvider serviceProvider;
 
-    public RpcServiceRegisterPostProcessor(ServiceProvider serviceProvider) {
+    public RpcServiceRegisterPostProcessor() {
         this.serviceProvider = SingletonFactory.getInstance(ZkServiceProviderImpl.class);
     }
 

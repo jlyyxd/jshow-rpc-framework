@@ -8,10 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="example-server" />
         <module name="example-client" />
-        <module name="rpc-frameword-common" />
         <module name="rpc-framework-core" />
         <module name="example-service-api" />
+        <module name="rpc-frameword-common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rpc-framework-common" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

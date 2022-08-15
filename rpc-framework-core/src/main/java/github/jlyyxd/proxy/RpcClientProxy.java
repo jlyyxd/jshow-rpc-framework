@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Slf4j
@@ -48,6 +49,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .methodName(method.getName())
                 .paramTypes(method.getParameterTypes())
                 .parameters(args)
+                .requestId(UUID.randomUUID().toString())
                 .group(rpcServiceConfig.getGroup())
                 .version(rpcServiceConfig.getVersion()).build();
         CompletableFuture<RpcResponse<Object>> completableFuture = rpcRequestTransport.sendRpcRequest(rpcRequest);
